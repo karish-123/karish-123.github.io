@@ -428,102 +428,118 @@
     /* ================================
        Mobile polish (keeps laptop same)
        ================================ */
-    @media (max-width: 768px) {
-      body { overflow: auto; }
+       @media (max-width: 768px) {
 
-      .desktop {
-        height: auto;
-        min-height: 100vh;
-        padding: 14px;
-        padding-bottom: 90px; /* space for taskbar */
-      }
+/* allow scrolling, and prevent clipping */
+body { overflow: auto; }
+.desktop {
+  height: auto !important;
+  min-height: 100vh;
+  padding: 14px !important;
+  padding-bottom: 90px !important; /* space for taskbar */
+}
 
-      /* Icons become a neat grid */
-      .desktop-icons {
-        position: relative;
-        left: auto;
-        top: auto;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(90px, 1fr));
-        gap: 14px;
-        margin-top: 10px;
-        justify-items: center;
-      }
+/* Icons become a neat grid */
+.desktop-icons {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(90px, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+  justify-items: center;
+}
 
-      .icon {
-        width: 100%;
-        max-width: 110px;
-        padding: 8px;
-      }
+.icon {
+  width: 100%;
+  max-width: 110px;
+  padding: 8px;
+}
+.icon-label { font-size: 12px; }
 
-      .icon-label { font-size: 12px; }
+/* ✅ CORE FIX: force windows to be fixed fullscreen and IGNORE inline top/left */
+.window {
+  position: fixed !important;
+  inset: 10px 10px 70px 10px !important;  /* top right bottom left */
+  width: auto !important;
+  height: auto !important;
 
-      /* Windows become full-screen-ish */
-      .window {
-        position: fixed !important;
-        left: 50% !important;
-        top: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        width: calc(100vw - 20px) !important;
-        height: calc(100vh - 80px) !important; /* leave room for taskbar */
-        min-width: auto !important;
-        max-width: none !important;
-        border-radius: 12px;
-        resize: none; /* disable resize on mobile */
-      }
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
 
-      .window-content {
-        max-height: none !important;
-        height: calc(100% - 44px);
-        overflow-y: auto;
-        padding: 14px;
-        -webkit-overflow-scrolling: touch;
-      }
+  min-width: 0 !important;
+  max-width: none !important;
+  border-radius: 12px;
+  resize: none !important;
+  overflow: hidden !important; /* header stays, content scrolls */
+}
 
-      /* About */
-      .monitor-container { padding: 14px; }
-      .monitor-screen {
-        padding: 16px;
-        font-size: 14px;
-        line-height: 1.6;
-      }
-      .monitor-screen h2 { font-size: 18px; }
+.window-header {
+  cursor: default !important; /* no drag cursor on mobile */
+}
 
-      /* Projects: one column */
-      .projects-grid {
-        grid-template-columns: 1fr !important;
-        gap: 14px;
-      }
+.window-content {
+  height: calc(100% - 44px) !important; /* header space */
+  max-height: none !important;
+  overflow-y: auto !important;
+  padding: 14px !important;
+  -webkit-overflow-scrolling: touch;
+}
 
-      /* Contact tighter */
-      .contact-item { padding: 12px; gap: 12px; }
-      .contact-icon { width: 52px; height: 52px; }
-      .contact-value { font-size: 14px; }
+/* About section smaller */
+.monitor-container { padding: 14px; }
+.monitor-screen {
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.monitor-screen h2 { font-size: 18px; }
 
-      /* Resume iframe fits */
-      #resumeWindow iframe { height: 65vh !important; }
+/* Projects one-column */
+.projects-grid {
+  grid-template-columns: 1fr !important;
+  gap: 14px;
+}
 
-      /* Stickers smaller */
-      .sticker {
-        width: 48px;
-        height: 48px;
-        opacity: 0.75;
-      }
+/* Contact tighter */
+.contact-item { padding: 12px; gap: 12px; }
+.contact-icon { width: 52px; height: 52px; }
+.contact-value { font-size: 14px; }
 
-      /* Mascot smaller */
-      .mascot {
-        right: 10px;
-        bottom: 64px;
-        opacity: 0.6;
-        transform: scale(0.75);
-        transform-origin: bottom right;
-      }
+/* Resume iframe fits */
+#resumeWindow iframe {
+  height: 60vh !important;
+}
 
-      /* Taskbar smaller */
-      .taskbar { height: 48px; }
-      .start-button img { width: 34px; height: 34px; }
-      .taskbar-time { padding: 6px 10px; font-size: 13px; }
-    }
+/* ✅ Stickers: option A (recommended): hide them on mobile */
+.sticker { display: none !important; }
+
+/* If you want tiny translucent instead, comment the line above and use this:
+.sticker {
+  width: 26px !important;
+  height: 26px !important;
+  opacity: 0.18 !important;
+  filter: none !important;
+}
+*/
+
+/* Mascot smaller so it doesn't block content */
+.mascot {
+  right: 8px;
+  bottom: 64px;
+  opacity: 0.45;
+  transform: scale(0.7);
+  transform-origin: bottom right;
+}
+
+/* Taskbar slightly smaller */
+.taskbar { height: 48px; }
+.start-button img { width: 34px; height: 34px; }
+.taskbar-time { padding: 6px 10px; font-size: 13px; }
+}
+
   </style>
 </head>
 
