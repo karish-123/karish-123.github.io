@@ -428,18 +428,24 @@
     /* ================================
        Mobile polish (keeps laptop same)
        ================================ */
-       @media (max-width: 768px) {
+       /* ================================
+   MOBILE ONLY (replace your entire
+   @media (max-width: 768px) block with this)
+   ================================ */
+@media (max-width: 768px) {
 
-/* allow scrolling, and prevent clipping */
+/* Prevent clipping + allow scroll */
 body { overflow: auto; }
+
+/* Desktop container should not lock to 100vh */
 .desktop {
   height: auto !important;
   min-height: 100vh;
   padding: 14px !important;
-  padding-bottom: 90px !important; /* space for taskbar */
+  padding-bottom: 90px !important; /* room for taskbar */
 }
 
-/* Icons become a neat grid */
+/* Icons -> grid */
 .desktop-icons {
   position: relative !important;
   left: auto !important;
@@ -456,29 +462,38 @@ body { overflow: auto; }
   max-width: 110px;
   padding: 8px;
 }
+
 .icon-label { font-size: 12px; }
 
-/* ✅ CORE FIX: force windows to be fixed fullscreen and IGNORE inline top/left */
+/* ✅ FULLSCREEN WINDOWS ON MOBILE (ignores inline top/left + centered class) */
 .window {
   position: fixed !important;
-  inset: 10px 10px 70px 10px !important;  /* top right bottom left */
+  inset: 10px 10px 70px 10px !important; /* top right bottom left */
   width: auto !important;
   height: auto !important;
 
+  /* kill any old positioning rules */
   left: auto !important;
   top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
   transform: none !important;
 
   min-width: 0 !important;
   max-width: none !important;
-  border-radius: 12px;
   resize: none !important;
-  overflow: hidden !important; /* header stays, content scrolls */
+  overflow: hidden !important; /* header fixed, content scrolls */
+  border-radius: 12px;
 }
 
-.window-header {
-  cursor: default !important; /* no drag cursor on mobile */
+/* Important: centered class must do NOTHING on mobile */
+.window.centered {
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
 }
+
+.window-header { cursor: default !important; }
 
 .window-content {
   height: calc(100% - 44px) !important; /* header space */
@@ -488,7 +503,7 @@ body { overflow: auto; }
   -webkit-overflow-scrolling: touch;
 }
 
-/* About section smaller */
+/* About section */
 .monitor-container { padding: 14px; }
 .monitor-screen {
   padding: 16px;
@@ -497,7 +512,7 @@ body { overflow: auto; }
 }
 .monitor-screen h2 { font-size: 18px; }
 
-/* Projects one-column */
+/* Projects: 1 column */
 .projects-grid {
   grid-template-columns: 1fr !important;
   gap: 14px;
@@ -509,23 +524,12 @@ body { overflow: auto; }
 .contact-value { font-size: 14px; }
 
 /* Resume iframe fits */
-#resumeWindow iframe {
-  height: 60vh !important;
-}
+#resumeWindow iframe { height: 60vh !important; }
 
-/* ✅ Stickers: option A (recommended): hide them on mobile */
+/* Stickers: remove on mobile (recommended) */
 .sticker { display: none !important; }
 
-/* If you want tiny translucent instead, comment the line above and use this:
-.sticker {
-  width: 26px !important;
-  height: 26px !important;
-  opacity: 0.18 !important;
-  filter: none !important;
-}
-*/
-
-/* Mascot smaller so it doesn't block content */
+/* Mascot smaller so it won't block */
 .mascot {
   right: 8px;
   bottom: 64px;
@@ -539,6 +543,7 @@ body { overflow: auto; }
 .start-button img { width: 34px; height: 34px; }
 .taskbar-time { padding: 6px 10px; font-size: 13px; }
 }
+
 
   </style>
 </head>
@@ -889,19 +894,22 @@ body { overflow: auto; }
 
     // Window controls
     function openWindow(windowId) {
-      const win = document.getElementById(windowId);
-      win.classList.add('active');
-      win.style.zIndex = 1000;
+  const win = document.getElementById(windowId);
+  win.classList.add('active');
+  win.style.zIndex = 1000;
 
-      // On mobile, always open centered (full-screen-ish styles apply via CSS)
-      if (window.innerWidth <= 768) {
-        win.classList.add('centered');
-      }
+  if (window.innerWidth <= 768) {
+    win.classList.remove('centered'); // fullscreen mode doesn't need centering
+    win.style.left = '';
+    win.style.top = '';
+    win.style.transform = '';
+  }
 
-      document.querySelectorAll('.window').forEach(w => {
-        if (w.id !== windowId) w.style.zIndex = 10;
-      });
-    }
+  document.querySelectorAll('.window').forEach(w => {
+    if (w.id !== windowId) w.style.zIndex = 10;
+  });
+}
+
 
     function closeWindow(windowId) {
       document.getElementById(windowId).classList.remove('active');
