@@ -178,7 +178,7 @@
       padding: 20px;
       max-height: 70vh;
       overflow-y: auto;
-      background: #ffc0e5;
+      background: linear-gradient(160deg, #fce7f3 0%, #ede9fe 100%);
       color: #333;
     }
 
@@ -218,50 +218,144 @@
     /* Projects */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
     }
 
     .project-card {
-      background: #FFF7ED;
-      border: 3px solid #FB923C;
-      border-radius: 8px;
-      padding: 15px;
-      box-shadow: 4px 4px 0 rgba(251, 146, 60, 0.3);
-      transition: transform 0.2s;
+      background: linear-gradient(135deg, rgba(255,255,255,0.72) 0%, rgba(243,232,255,0.6) 100%);
+      border: 1.5px solid rgba(168, 85, 247, 0.3);
+      border-top: 3px solid #C026D3;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.1);
+      transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
 
     .project-card:hover {
-      transform: rotate(-1deg) scale(1.02);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(124, 58, 237, 0.22);
+      border-color: rgba(232, 121, 249, 0.6);
     }
 
     .project-card h3 {
-      color: #EA580C;
-      margin-bottom: 10px;
-      font-size: 18px;
+      color: #6D28D9;
+      font-size: 16px;
+      margin: 0;
     }
 
     .project-card p {
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.65;
+      color: #4C1D95;
+      margin: 0;
+      flex: 1;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tech-tag {
+      background: linear-gradient(135deg, #EDE9FE, #FAE8FF);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      color: #6D28D9;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      white-space: nowrap;
     }
 
     .project-link {
       display: inline-block;
-      background: linear-gradient(135deg, #FB923C, #F97316);
+      background: linear-gradient(135deg, #A855F7, #C026D3);
       color: white;
-      padding: 8px 16px;
-      border-radius: 4px;
+      padding: 7px 15px;
+      border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      border: 2px solid #EA580C;
+      font-size: 13px;
+      border: 1.5px solid rgba(255,255,255,0.3);
       transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+      align-self: flex-start;
     }
 
     .project-link:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(124, 58, 237, 0.45);
+      background: linear-gradient(135deg, #C026D3, #E879F9);
+    }
+
+    /* Experience */
+    .experience-card {
+      background: linear-gradient(135deg, rgba(88, 28, 135, 0.08) 0%, rgba(192, 38, 211, 0.06) 100%);
+      border: 1.5px solid rgba(168, 85, 247, 0.3);
+      border-left: 4px solid #C026D3;
+      border-radius: 12px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .exp-role {
+      font-size: 20px;
+      font-weight: bold;
+      color: #6D28D9;
+    }
+
+    .exp-company {
+      font-size: 17px;
+      font-weight: bold;
+      color: #C026D3;
+      margin-top: 2px;
+    }
+
+    .exp-meta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 13px;
+      color: #7C3AED;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+
+    .exp-meta span { opacity: 0.8; }
+    .exp-meta .dot { opacity: 0.4; }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0;
+    }
+
+    .exp-bullets li {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: #4C1D95;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #C026D3;
+      font-size: 12px;
+      top: 2px;
     }
 
     /* Contact Links */
@@ -596,6 +690,13 @@ body { overflow: auto; }
         </div>
         <div class="icon-label">Resume</div>
       </div>
+
+      <div class="icon" onclick="openWindow('experienceWindow')">
+        <div class="icon-image">
+          <img src="assets/folder.png" alt="Experience" />
+        </div>
+        <div class="icon-label">Experience</div>
+      </div>
     </div>
 
     <!-- About Me Window -->
@@ -648,100 +749,187 @@ body { overflow: auto; }
 
       <div class="window-content">
         <div class="projects-grid">
+
+          <div class="project-card">
+            <h3>🪵 LogHive</h3>
+            <div class="tech-tags">
+              <span class="tech-tag">Go</span>
+              <span class="tech-tag">Kubernetes</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">NDJSON</span>
+            </div>
+            <p>Distributed log aggregation pipeline in Go on Kubernetes — a self-hosted alternative to Loki/ELK. Four microservices with API-key authenticated querying, concurrent write safety, and daily-rotating storage on PersistentVolume.</p>
+            <a href="https://github.com/karish-123/LogHive" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
+          </div>
+
+          <div class="project-card">
+            <h3>🛡️ Sentinel AI</h3>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">DeBERTa</span>
+              <span class="tech-tag">FAISS</span>
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">HuggingFace</span>
+              <span class="tech-tag">Streamlit</span>
+            </div>
+            <p>End-to-end ML security system for LLMs — detects adversarial prompts (macro F1 0.812), identifies PII via hybrid NER + regex, and answers compliance questions (GDPR, HIPAA, NIST) via RAG with sub-100ms latency.</p>
+            <a href="https://github.com/karish-123/sentinel" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
+          </div>
+
+          <div class="project-card">
+            <h3>⚙️ queuectl</h3>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">CLI</span>
+            </div>
+            <p>CLI job queue manager with multi-worker processing, exponential backoff retry logic, Dead Letter Queue (DLQ) support, and real-time job status monitoring.</p>
+            <a href="https://github.com/karish-123/queuectl" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
+          </div>
+
           <div class="project-card">
             <h3>🎨 Ray Tracing Optimization</h3>
-            <p><strong>Tech:</strong> C++, CUDA, OpenMP, BVH</p>
-            <p>
-              Engineered a high-performance ray tracer and optimized rendering using BVH acceleration, demonstrating CPU–GPU
-              performance tuning and heterogeneous parallel programming.
-            </p>
-            <a href="https://github.com/karish-123/RayTraceX.git" class="project-link" target="_blank" rel="noreferrer">
-              View on GitHub →
-            </a>
+            <div class="tech-tags">
+              <span class="tech-tag">C++</span>
+              <span class="tech-tag">CUDA</span>
+              <span class="tech-tag">OpenMP</span>
+              <span class="tech-tag">BVH</span>
+            </div>
+            <p>High-performance ray tracer optimized with BVH acceleration, demonstrating CPU–GPU performance tuning and heterogeneous parallel programming.</p>
+            <a href="https://github.com/karish-123/RayTraceX.git" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
           </div>
 
           <div class="project-card">
             <h3>🚂 LoRaWAN Train Tracking</h3>
-            <p><strong>Tech:</strong> Python, Kafka, Redis, Flink, PyTorch (LSTM)</p>
-            <p>
-              Built a real-time telemetry and alerting pipeline using Kafka, Flink, and Redis with sub-800ms end-to-end latency.
-              Implemented secure communication using X25519 and AES-GCM.
-            </p>
-            <a href="https://github.com/CapstoneTeam5-2026" class="project-link" target="_blank" rel="noreferrer">
-              View on GitHub →
-            </a>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Kafka</span>
+              <span class="tech-tag">Redis</span>
+              <span class="tech-tag">Flink</span>
+              <span class="tech-tag">PyTorch</span>
+            </div>
+            <p>Real-time telemetry and alerting pipeline with sub-800ms end-to-end latency. Secure communication via X25519 and AES-GCM encryption.</p>
+            <a href="https://github.com/CapstoneTeam5-2026" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
           </div>
 
           <div class="project-card">
             <h3>📊 Distributed Logging System</h3>
-            <p><strong>Tech:</strong> Kafka, Fluentd, Elasticsearch, Kibana, Docker</p>
-            <p>
-              Designed a scalable, high-throughput log aggregation pipeline using Kafka and the ELK stack.
-              Containerized the entire system using Docker for production-ready deployment.
-            </p>
-            <a href="https://github.com/Cloud-Computing-Big-Data/EC-Team-17-distributed-logging-system" class="project-link" target="_blank" rel="noreferrer">
-              View on GitHub →
-            </a>
+            <div class="tech-tags">
+              <span class="tech-tag">Kafka</span>
+              <span class="tech-tag">Fluentd</span>
+              <span class="tech-tag">Elasticsearch</span>
+              <span class="tech-tag">Kibana</span>
+              <span class="tech-tag">Docker</span>
+            </div>
+            <p>Scalable, high-throughput log aggregation pipeline using Kafka and the ELK stack, fully containerized with Docker for production-ready deployment.</p>
+            <a href="https://github.com/Cloud-Computing-Big-Data/EC-Team-17-distributed-logging-system" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
           </div>
 
           <div class="project-card">
             <h3>🤖 AI-Powered Placement Portal</h3>
-            <p><strong>Tech:</strong> Go, React, TypeScript, PostgreSQL, Mistral LLM, Ollama</p>
-            <p>
-              Developed a full-stack student evaluation platform integrating GitHub, LeetCode, and resume data.
-              Deployed a locally hosted Mistral LLM for chatbot-based queries.
-            </p>
-            <a href="https://github.com/nocap-placify/placify" class="project-link" target="_blank" rel="noreferrer">
-              View on GitHub →
-            </a>
+            <div class="tech-tags">
+              <span class="tech-tag">Go</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Mistral LLM</span>
+            </div>
+            <p>Full-stack student evaluation platform integrating GitHub, LeetCode, and resume data with a locally hosted Mistral LLM chatbot for queries.</p>
+            <a href="https://github.com/nocap-placify/placify" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
           </div>
 
           <div class="project-card">
             <h3>📄 ClutterFlow: Document AI</h3>
-            <p><strong>Tech:</strong> Python, FastAPI, React, Gemini LLM, Supabase, Docker</p>
-            <p>
-              Built a full-stack platform for classifying and summarizing unstructured documents.
-              Integrated OCR and Gemini LLM for topic classification, deployed on Cloud Run and Vercel.
-            </p>
-            <a href="https://github.com/karish-123/ClutterFlow.git" class="project-link" target="_blank" rel="noreferrer">
-              View on GitHub →
-            </a>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Gemini LLM</span>
+              <span class="tech-tag">Supabase</span>
+            </div>
+            <p>Full-stack platform for classifying and summarizing unstructured documents. OCR + Gemini LLM for topic classification, deployed on Cloud Run and Vercel.</p>
+            <a href="https://github.com/karish-123/ClutterFlow.git" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
           </div>
 
           <div class="project-card">
             <h3>📈 Stock Price Predictor</h3>
-            <p><strong>Tech:</strong> Python, TensorFlow, Streamlit, Plotly</p>
-            <p>
-              Developed a Streamlit-based dashboard to predict next-day stock prices for Indian companies.
-              Built GRU models using technical indicators and exploratory data analysis features.
-            </p>
-            <a href="https://github.com/karish-123/Stock-Price-Prediction-with-GRU.git" class="project-link" target="_blank" rel="noreferrer">
-              View on GitHub →
-            </a>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">TensorFlow</span>
+              <span class="tech-tag">Streamlit</span>
+              <span class="tech-tag">Plotly</span>
+            </div>
+            <p>Streamlit dashboard predicting next-day stock prices for Indian companies using GRU models built on technical indicators and EDA features.</p>
+            <a href="https://github.com/karish-123/Stock-Price-Prediction-with-GRU.git" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
           </div>
 
           <div class="project-card">
             <h3>😊 Emotion Recognition System</h3>
-            <p><strong>Tech:</strong> TensorFlow, PyTorch, librosa, scikit-learn</p>
-            <p>
-              Engineered a multimodal emotion recognition system using audio–visual conversational datasets.
-              Implemented and evaluated early fusion and late fusion strategies across modalities.
-            </p>
-            <a href="https://github.com/karish-123/emotion-multimodal-fusion-model" class="project-link" target="_blank" rel="noreferrer">
-              View on GitHub →
-            </a>
+            <div class="tech-tags">
+              <span class="tech-tag">TensorFlow</span>
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">librosa</span>
+              <span class="tech-tag">scikit-learn</span>
+            </div>
+            <p>Multimodal emotion recognition across audio–visual conversational datasets. Implemented and evaluated early fusion and late fusion strategies.</p>
+            <a href="https://github.com/karish-123/emotion-multimodal-fusion-model" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
           </div>
 
           <div class="project-card">
             <h3>🚗 Vehicle Demand Forecasting</h3>
-            <p><strong>Tech:</strong> Python, pandas, statsmodels (SARIMAX), XGBoost</p>
-            <p>
-              Developed time series forecasting models for car and bike demand using SARIMAX.
-              Applied XGBoost to model auto-rickshaw demand and capture seasonal patterns.
-            </p>
-            <a href="https://github.com/karish-123/RideWave-Analytics-Challenge-Fare-Forecasting-in-Quahog-City" class="project-link" target="_blank" rel="noreferrer">
-              View on GitHub →
-            </a>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">SARIMAX</span>
+              <span class="tech-tag">XGBoost</span>
+              <span class="tech-tag">pandas</span>
+            </div>
+            <p>Time series forecasting for car, bike, and auto-rickshaw demand using SARIMAX and XGBoost to capture seasonal patterns.</p>
+            <a href="https://github.com/karish-123/RideWave-Analytics-Challenge-Fare-Forecasting-in-Quahog-City" class="project-link" target="_blank" rel="noreferrer">View on GitHub →</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Experience Window -->
+    <div id="experienceWindow" class="window" style="top: 130px; left: 230px; width: 640px;">
+      <div class="window-header" onmousedown="startDrag(event, 'experienceWindow')">
+        <div class="window-title">
+          <span>💼</span>
+          <span>EXPERIENCE.exe</span>
+        </div>
+        <div class="window-controls">
+          <div class="window-button" onclick="minimizeWindow('experienceWindow')">−</div>
+          <div class="window-button" onclick="closeWindow('experienceWindow')">×</div>
+        </div>
+      </div>
+
+      <div class="window-content">
+        <div class="experience-card">
+          <div>
+            <div class="exp-role">Software Engineering Intern</div>
+            <div class="exp-company">Aptos Retail</div>
+            <div class="exp-meta">
+              <span>Jan 2026 – Present</span>
+              <span class="dot">·</span>
+              <span>Extensibility Team, Bengaluru</span>
+            </div>
+          </div>
+
+          <ul class="exp-bullets">
+            <li>Developed backend microservices and REST APIs using Hapi.js, TypeScript, and Docker, enabling seamless integration between the Aptos One retail platform and Salesforce CRM for enterprise clients.</li>
+            <li>Built event-driven message processing pipelines using RabbitMQ, reducing inter-service coupling and improving system reliability across the platform extensibility layer.</li>
+            <li>Deployed containerized services on AWS, collaborating in Agile sprints with code reviews and infrastructure debugging to maintain production uptime.</li>
+          </ul>
+
+          <div class="tech-tags">
+            <span class="tech-tag">Hapi.js</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">RabbitMQ</span>
+            <span class="tech-tag">AWS</span>
+            <span class="tech-tag">REST APIs</span>
+            <span class="tech-tag">Salesforce CRM</span>
+            <span class="tech-tag">Agile</span>
           </div>
         </div>
       </div>
